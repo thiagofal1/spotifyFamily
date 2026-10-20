@@ -78,6 +78,8 @@ Dados de produção, credenciais, números de telefone, mensagens, URLs de webho
 
 **Case demonstrativo pronto para apresentação.** A infraestrutura local, a arquitetura e um workflow sanitizado estão documentados para demonstrar a solução sem expor dados operacionais.
 
-## Licença
+## Direitos autorais
 
-MIT.
+Copyright © 2026 Thiago Alencar.
+
+Este repositório foi publicado como case demonstrativo para apresentação profissional. Para reutilizar, adaptar ou incorporar o código e os workflows em outro projeto, entre em contato com o autor.
