@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+
+# Dados locais e volumes de desenvolvimento
+*.db
+.n8n/
+data/
+
+# Exportações que podem conter credenciais ou identificadores reais
+workflows/private/
