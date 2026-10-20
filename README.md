@@ -40,6 +40,7 @@ Consulte [docs/architecture.md](docs/architecture.md) para conhecer os component
 - `compose.yaml`: ambiente local com n8n, Evolution API, PostgreSQL e Redis.
 - `.env.example`: modelo de configuração sem credenciais reais.
 - `workflows/README.md`: orientação para exportar workflows sanitizados.
+- `workflows/public/spotify-family-payments.demo.json`: exemplo sanitizado do fluxo de consulta e notificação.
 - `docs/`: documentação técnica e decisões do projeto.
 
 ## Como executar localmente
@@ -76,7 +77,7 @@ Use dados fictícios e uma conta/planilha de demonstração para qualquer exempl
 
 ## Próximas melhorias
 
-1. Adicionar workflows n8n exportados e sanitizados em `workflows/public/`.
+1. Validar a importação do workflow demonstrativo em uma instância n8n limpa.
 2. Documentar cada workflow com entrada, saída e tratamento de erros.
 3. Criar uma planilha de demonstração com dados fictícios.
 4. Adicionar screenshots ou um diagrama atualizado do fluxo.
@@ -86,7 +87,7 @@ Use dados fictícios e uma conta/planilha de demonstração para qualquer exempl
 
 ## Status
 
-**Case de automação em preparação para publicação pública.** A infraestrutura local está documentada; os workflows e exemplos públicos ainda precisam ser sanitizados antes da divulgação.
+**Case de automação em preparação para publicação pública.** A infraestrutura local está documentada e já existe um workflow demonstrativo sanitizado; ainda falta validar a importação e adicionar os demais fluxos públicos, se houver.
 
 ## Licença
 

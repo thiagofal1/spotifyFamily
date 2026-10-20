@@ -9,3 +9,5 @@ Os workflows públicos devem ser exportados para `workflows/public/` somente dep
 5. testar a importação em uma instância local limpa.
 
 Workflows de produção ou que contenham dados reais não devem ser versionados neste repositório.
+
+O arquivo `spotify-family-payments.demo.json` é um exemplo sanitizado. Ele usa IDs, credenciais, participantes e destinatários fictícios e está desativado por padrão.
