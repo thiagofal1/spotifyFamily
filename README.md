@@ -61,33 +61,22 @@ docker compose up -d
 
 Depois, acesse os serviços locais conforme as portas configuradas no `compose.yaml`.
 
-## Segurança e privacidade
+## Segurança
 
-Nunca publique:
+O projeto utiliza variáveis de ambiente para credenciais e configurações locais. A versão pública usa apenas dados fictícios, identificadores demonstrativos e um workflow desativado por padrão.
 
-- `.env` ou chaves de criptografia;
-- tokens da Evolution API ou do Google;
-- números de telefone, nomes e mensagens reais;
-- URLs de webhook de produção;
-- IDs ou links de planilhas reais;
-- QR codes, dados de sessão ou volumes exportados;
-- workflows n8n que ainda contenham credenciais embutidas.
+Dados de produção, credenciais, números de telefone, mensagens, URLs de webhook e IDs de planilhas não fazem parte deste repositório.
 
-Use dados fictícios e uma conta/planilha de demonstração para qualquer exemplo público.
+## Evolução do projeto
 
-## Próximas melhorias
-
-1. Validar a importação do workflow demonstrativo em uma instância n8n limpa.
-2. Documentar cada workflow com entrada, saída e tratamento de erros.
-3. Criar uma planilha de demonstração com dados fictícios.
-4. Adicionar screenshots ou um diagrama atualizado do fluxo.
-5. Criar testes de payload para os webhooks principais.
-6. Registrar decisões sobre idempotência, retries e falhas de comunicação.
-7. Publicar uma release com instruções reproduzíveis.
+- Adicionar novos workflows demonstrativos conforme forem documentados.
+- Expandir os testes de payload e tratamento de erros.
+- Registrar decisões sobre idempotência, retries e falhas de comunicação.
+- Publicar releases com instruções reproduzíveis.
 
 ## Status
 
-**Case de automação em preparação para publicação pública.** A infraestrutura local está documentada e já existe um workflow demonstrativo sanitizado; ainda falta validar a importação e adicionar os demais fluxos públicos, se houver.
+**Case demonstrativo pronto para apresentação.** A infraestrutura local, a arquitetura e um workflow sanitizado estão documentados para demonstrar a solução sem expor dados operacionais.
 
 ## Licença
 
