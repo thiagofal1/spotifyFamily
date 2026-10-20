@@ -1,0 +1,152 @@
+{
+  "name": "Spotify Family - Payments (Demo)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtHour": 9
+            },
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 25
+            },
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "schedule-trigger-demo",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "GOOGLE_SHEET_ID_DEMO",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Painel Demo",
+          "mode": "name"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "specifyRange",
+              "headerRow": 3,
+              "firstDataRow": 4
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        240,
+        0
+      ],
+      "id": "google-sheets-demo",
+      "name": "Get payment rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GOOGLE_CREDENTIAL_DEMO",
+          "name": "Google Sheets Demo"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.all().map(item => item.json);\nconst names = ['Pessoa A', 'Pessoa B', 'Pessoa C'];\nconst participants = data.filter(item => names.includes(String(item.Pessoas ?? '').trim()));\n\nif (participants.length !== names.length) {\n  throw new Error('Demo expects three fictional participants.');\n}\n\nconst message = participants.map(person => {\n  const status = String(person['Situação'] ?? 'Sem status');\n  return `${status === 'Em dia' ? 'OK' : 'PENDENTE'} - ${person.Pessoas}: ${status}`;\n}).join('\\n');\n\nreturn [{\n  json: {\n    message: `Resumo demonstrativo de pagamentos\\n\\n${message}`,\n    recipient: 'PHONE_NUMBER_OR_GROUP_ID_DEMO'\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "code-node-demo",
+      "name": "Build notification"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/message/sendText/INSTANCE_NAME_DEMO",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "EVOLUTION_API_KEY_DEMO"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { number: $json.recipient, text: $json.message } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        0
+      ],
+      "id": "http-request-demo",
+      "name": "Send notification"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get payment rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get payment rows": {
+      "main": [
+        [
+          {
+            "node": "Build notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build notification": {
+      "main": [
+        [
+          {
+            "node": "Send notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "demo-version",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
